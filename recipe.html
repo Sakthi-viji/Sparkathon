@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recipes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#f8fbfa] text-[#0e1a13] min-h-screen flex flex-col">
+    <header class="p-4 border-b border-[#e8f2ec]">
+      <h1 class="text-lg font-bold text-center">Recipes for You</h1>
+    </header>
+
+    <main class="flex-1 p-4 space-y-4">
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-base font-semibold">Banana Oat Pancakes</h2>
+        <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+          <li>2 ripe bananas</li>
+          <li>1 cup oats</li>
+          <li>2 eggs</li>
+          <li>Pinch of salt</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-base font-semibold">Fruit Salad</h2>
+        <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+          <li>Apples</li>
+          <li>Bananas</li>
+          <li>Any seasonal fruits</li>
+          <li>Honey (optional)</li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-4 rounded-xl shadow">
+        <h2 class="text-base font-semibold">Oatmeal Bowl</h2>
+        <ul class="list-disc list-inside text-sm mt-2 space-y-1">
+          <li>1/2 cup oats</li>
+          <li>1 cup milk or water</li>
+          <li>Fruits & nuts for topping</li>
+          <li>Sweetener (optional)</li>
+        </ul>
+      </div>
+    </main>
+
+    <footer class="pb-6 pt-4 px-4 mt-auto border-t border-[#e8f2ec] bg-[#f8fbfa]">
+      <nav class="flex justify-around text-[#51946c]">
+        <a href="#" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77Z"/>
+          </svg>
+          <span class="text-xs font-medium">Home</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/>
+          </svg>
+          <span class="text-xs font-medium">Search</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87Z"/>
+          </svg>
+          <span class="text-xs font-medium">Cart</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 text-[#0e1a13]">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z"/>
+          </svg>
+          <span class="text-xs font-medium">Account</span>
+        </a>
+      </nav>
+    </footer>
+  </body>
+</html>
