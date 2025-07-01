@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Scan & Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Noto+Sans:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+      body {
+        font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#f9fbfa] min-h-screen flex flex-col justify-between">
+    <header class="p-4 pb-2">
+      <h1 class="text-center text-xl font-bold">FridgeCart – Snap. Detect. Shop.</h1>
+    </header>
+
+    <main class="px-4 py-6 text-center">
+      <h2 class="text-2xl font-bold text-[#101914] mb-2">Scan Your Fridge</h2>
+      <p class="text-[#101914] mb-4">
+        Upload a photo of your fridge to detect ingredients.
+      </p>
+
+      <div class="flex flex-col gap-4 items-center">
+        <!-- File Upload -->
+        <input
+          type="file"
+          id="image-upload"
+          accept="image/*"
+          class="block w-full text-sm text-gray-500
+                 file:mr-4 file:py-2 file:px-4
+                 file:rounded-full file:border-0
+                 file:text-sm file:font-semibold
+                 file:bg-[#e9f1ec] file:text-[#101914]
+                 hover:file:bg-[#c8d8d0]"
+        />
+
+        <!-- Scan Button -->
+        <button
+          id="scan-button"
+          class="bg-[#94e0b2] text-[#101914] font-bold py-3 px-6 rounded-full shadow"
+        >
+          Scan Now
+        </button>
+
+        <p id="status-message" class="text-sm text-[#5a8c6e] mt-2"></p>
+      </div>
+    </main>
+
+    <!-- ✅ Footer Navigation -->
+    <footer class="border-t border-[#e9f1ec] px-4 py-3 bg-[#f9fbfa]">
+      <nav class="flex justify-around text-[#5a8c6e]">
+        <a href="/" class="flex flex-col items-center gap-1 text-[#101914]">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><path d="..." /></svg>
+          <span class="text-xs">Home</span>
+        </a>
+        <a href="/recipes.html" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><path d="..." /></svg>
+          <span class="text-xs">Recipes</span>
+        </a>
+        <a href="/fridge.html" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><path d="..." /></svg>
+          <span class="text-xs">Fridge</span>
+        </a>
+        <a href="/cart.html" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><path d="..." /></svg>
+          <span class="text-xs">Cart</span>
+        </a>
+        <a href="/checkout.html" class="flex flex-col items-center gap-1">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 256 256"><path d="..." /></svg>
+          <span class="text-xs">Checkout</span>
+        </a>
+      </nav>
+    </footer>
+
+    <!-- JS Integration -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const scanBtn = document.getElementById("scan-button");
+        const uploadInput = document.getElementById("image-upload");
+        const statusText = document.getElementById("status-message");
+
+        scanBtn.addEventListener("click", async () => {
+          if (uploadInput.files.length === 0) {
+            statusText.textContent = "⚠️ Please select an image first.";
+            return;
+          }
+
+          statusText.textContent = "🔍 Scanning...";
+
+          const formData = new FormData();
+          formData.append("image", uploadInput.files[0]);
+
+          try {
+            const res = await fetch("/api/detect", {
+              method: "POST",
+              body: formData,
+            });
+
+            const data = await res.json();
+            console.log("Detected items:", data.items);
+
+            localStorage.setItem("detectedItems", JSON.stringify(data.items));
+            window.location.href = "/fridge.html";
+          } catch (error) {
+            console.error("Error:", error);
+            statusText.textContent = "❌ Scan failed.";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
