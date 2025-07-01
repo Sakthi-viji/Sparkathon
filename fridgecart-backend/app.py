@@ -1,35 +1,56 @@
-# app.py
-
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from fridge_detector import detect_items
-from mock_data import item_to_product
+from mock_data import get_mock_products, get_recipes
 
 app = Flask(__name__)
-cart = []
 
+# Set scanpage.html as homepage
 @app.route('/')
 def home():
-    return "FridgeCart Backend is running."
+    return render_template('scanpage.html')
 
-@app.route('/upload-photo', methods=['POST'])
-def upload_photo():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image uploaded'}), 400
+@app.route('/recipes.html')
+def recipes():
+    return render_template('recipes.html')
+
+@app.route('/fridge.html')
+def fridge():
+    return render_template('fridge.html')
+
+@app.route('/myfridge.html')
+def myfridge():
+    return render_template('myfridge.html')
+
+@app.route('/cart.html')
+def cart():
+    return render_template('cart.html')
+
+@app.route('/checkout.html')
+def checkout():
+    return render_template('checkout.html')
+
+# API: Detect items from uploaded image
+@app.route('/api/detect', methods=['POST'])
+def detect():
     image = request.files['image']
     items = detect_items(image)
     return jsonify({'items': items})
 
-@app.route('/confirm-cart', methods=['POST'])
-def confirm_cart():
-    data = request.get_json()
-    selected_items = data.get('items', [])
-    global cart
-    cart = [item_to_product.get(i, f"{i} (Unavailable)") for i in selected_items]
-    return jsonify({'cart': cart})
+# API: Return current fridge items
+@app.route('/api/fridge', methods=['GET'])
+def fridge_items():
+    items = ['banana', 'apple', 'oats']
+    return jsonify({'items': items})
 
-@app.route('/view-cart', methods=['GET'])
-def view_cart():
-    return jsonify({'cart': cart})
+# API: Return mock cart products
+@app.route('/api/cart', methods=['GET'])
+def get_cart():
+    return jsonify({'cart': get_mock_products()})
+
+# API: Return recipes
+@app.route('/api/recipes', methods=['GET'])
+def recipe_list():
+    return jsonify({'recipes': get_recipes()})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(debug=True)
